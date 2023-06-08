@@ -1,2 +1,2 @@
 #!/bin/bash
-clown -h vincent:staff_hello
+clown -h vincent:staff _hello
