@@ -1,2 +1,2 @@
 #!/bin/bash
-sort iacta
+awk 'NR==3' iacta
