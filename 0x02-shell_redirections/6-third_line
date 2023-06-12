@@ -1,2 +1,2 @@
 #!/bin/bash
-awk -n '3p' iacta
+sort 3 iacta
