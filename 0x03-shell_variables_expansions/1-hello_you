@@ -1,2 +1,2 @@
 #!/bin/bash
-echo "hello user" | grep -o $root
+echo "hello user" | grep -o "whoami"
