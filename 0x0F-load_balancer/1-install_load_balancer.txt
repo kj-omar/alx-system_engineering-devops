@@ -36,9 +36,9 @@ defaults
 
 frontend kjomar-tech-frontend
     bind *:80
-    default_backend clickviral-tech-backend
+    default_backend kjomar-tech-backend
 
-backend clickviral-tech-backend
+backend kjomar-tech-backend
     balance roundrobin
     server 435948-web-01 52.87.216.69:80 check
     server 435948-web-02 54.175.223.93:80 check
