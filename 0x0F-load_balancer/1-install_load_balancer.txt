@@ -34,7 +34,7 @@ defaults
   timeout server 15s
   timeout http-request 10s
 
-frontend clickviral-tech-frontend
+frontend kjomar-tech-frontend
     bind *:80
     default_backend clickviral-tech-backend
 
