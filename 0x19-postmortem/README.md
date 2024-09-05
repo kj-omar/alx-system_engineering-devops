@@ -1,5 +1,4 @@
-
-stmortem: Web Stack Outage
+Postmortem: Web Stack Outage
 Issue Summary
 Duration of Outage:
 The outage lasted for 2 hours, from 12:00 PM to 2:00 PM UTC on July 12, 2024.
@@ -43,3 +42,48 @@ Implement traffic rate limiting on the application layer to prevent overwhelming
 Add automated scaling rules to increase load balancer capacity dynamically based on real-time traffic metrics.
 Improve internal documentation on Nginx configurations and scaling procedures to avoid future misconfigurations.
 Provide training for the engineering team on traffic management and optimizing proxy settings.
+This postmortem outlines the timeline, root cause, and corrective actions necessary to prevent a recurrence of this outage, ensuring our infrastructure can handle future traffic surges without service degradation.
+Postmortem: The Nginx Apocalypse
+Issue Summary
+Duration of Outage:
+The Nginx Apocalypse lasted for a nerve-wracking 2 hours on July 12, 2024 (12:00 PM to 2:00 PM UTC).
+If you were wondering, yes, that's two entire episodes of your favorite Netflix show.
+
+Impact:
+A whopping 60% of users either experienced slower load times than your grandma’s internet or, worse, faced a cold, emotionless 504 Gateway Timeout. Around 40% couldn't even log in or access their accounts—talk about a Monday morning!
+
+Root Cause:
+It wasn’t aliens, sadly. A simple misconfiguration in our Nginx reverse proxy settings caused our load balancer to wave the white flag under heavy traffic.
+
+Timeline: When Things Went Downhill
+12:00 PM UTC - We heard a ping: "Monitor alert: High latency!" And then the pings didn’t stop… Uh-oh.
+12:05 PM UTC - Customer complaints started rolling in. One user described it as "worse than waiting for my pizza."
+12:10 PM UTC - The team dived into the logs, pointing fingers at the database, because when in doubt, blame the database, right?
+12:20 PM UTC - Turns out the database was innocent (this time). It had a clean alibi—query times were perfectly fine.
+12:30 PM UTC - Infrastructure team gets called in: "Hey, we might need your help..."
+12:45 PM UTC - We start suspecting the load balancer. Logs reveal it’s running like a hamster on a wheel during a marathon.
+1:00 PM UTC - Found the culprit! Misconfigured Nginx timeout settings—oops.
+1:15 PM UTC - False start: Tried fixing things on the app layer, which didn't work.
+1:30 PM UTC - Applied the correct timeout settings in Nginx. The load balancer breathes a sigh of relief.
+1:45 PM UTC - Services begin to recover, and users start rejoicing.
+2:00 PM UTC - The apocalypse is over. We live to fight another day.
+Root Cause and Resolution
+Root Cause:
+Picture this: the marketing team runs a massive campaign. Users flood in, but Nginx has a panic attack. The timeout settings were set too low, causing the load balancer to freak out and time out requests. This led to cascading 504 errors, and users were left staring at blank screens.
+
+Resolution:
+We adjusted the timeout settings in Nginx's configuration, giving the load balancer more time to process each request (a bit like giving it a coffee break). We also temporarily increased load balancer capacity to handle the traffic surge while the changes propagated.
+
+Corrective and Preventative Measures
+So, what did we learn (besides never trusting default configurations)?
+
+We realized that having a well-configured Nginx is key to avoiding a meltdown during traffic surges.
+Traffic spikes from marketing campaigns are no joke. We’ll need to prepare for those in advance.
+TODO:
+
+Patch Nginx config to allow more time for traffic handling (because sometimes things just need a moment).
+Run stress tests to simulate the chaos of a traffic surge and see what breaks.
+Implement rate limiting so that our servers don’t throw in the towel when everyone hits "refresh" at once.
+Auto-scale the load balancer based on traffic (because who wants to manually scale during a meltdown?).
+Improve documentation (the ultimate "did you try turning it off and on again?" guide).
+Team training on handling Nginx and load balancers without causing accidental mini-apocalypses.
