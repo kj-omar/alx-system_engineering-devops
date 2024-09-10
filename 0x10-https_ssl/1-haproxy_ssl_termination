@@ -47,5 +47,5 @@ frontend kjomar-frontend-https
 
 backend kjomar-backend
         balance roundrobin
-        server 435948-web-01 52.87.216.69:80 check
-        server 435948-web-02 54.175.223.93:80 check
+        server 435948-web-01 54.157.163.20:80 check
+        server 435948-web-02 100.27.14.94:80 check
